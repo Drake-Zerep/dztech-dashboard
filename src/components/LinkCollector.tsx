@@ -15,7 +15,6 @@ export default function LinkCollector() {
     try {
       const res = await fetch('/api/sheets.php?action=get_links');
       const data = await res.json();
-      // Asume lista plana en columna A
       setLinks(data.values ? data.values.flat() : []);
     } catch (e) { console.error(e); }
     finally { setLoading(false); }
@@ -25,7 +24,6 @@ export default function LinkCollector() {
     e.preventDefault();
     if (!url) return;
     
-    // Optimistic UI update
     setLinks(prev => [url, ...prev]);
     setUrl('');
 
