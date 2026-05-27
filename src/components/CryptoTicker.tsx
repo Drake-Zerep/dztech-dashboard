@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUp, ArrowDown } from 'lucide-react'; // Necesitas instalar lucide-react: npm i lucide-react
+import { ArrowUp, ArrowDown } from 'lucide-react';
 
 const ASSETS = ['BTC', 'ETH', 'SOL', 'ADA', 'AVAX', 'TON', 'SUI', 'XRP', 'ZEC', 'BNB'];
 
@@ -18,13 +18,11 @@ export default function CryptoTicker() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Llamada a nuestro proxy PHP
         const res = await fetch('/api/crypto.php');
         const json = await res.json();
         
-        // Mapeamos solo los activos que nos interesan
         const filtered = ASSETS.map(symbol => {
-          const item = json.result.list.find((i: any) => i.symbol === `${symbol}USDT`);
+          const item = json.result?.list?.find((i: any) => i.symbol === `${symbol}USDT`);
           return {
             symbol: symbol,
             price: item ? parseFloat(item.lastPrice).toFixed(item.lastPrice.length > 4 ? 4 : 2) : '0.00',
@@ -40,7 +38,7 @@ export default function CryptoTicker() {
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 30000); // Update cada 30s
+    const interval = setInterval(fetchData, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -71,7 +69,6 @@ export default function CryptoTicker() {
         </div>
       )}
       
-      {/* Glow effect decorativo */}
       <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
     </div>
   );
