@@ -16,7 +16,6 @@ export default function CalendarWidget() {
   const [showForm, setShowForm] = useState(false);
   const [newEvent, setNewEvent] = useState({ summary: '', dateTime: '' });
 
-  // Cargar eventos
   useEffect(() => {
     fetchEvents();
   }, []);
@@ -44,7 +43,7 @@ export default function CalendarWidget() {
       });
       setShowForm(false);
       setNewEvent({ summary: '', dateTime: '' });
-      fetchEvents(); // Recargar lista
+      fetchEvents();
     } catch (err) { console.error(err); }
   };
 
@@ -70,7 +69,6 @@ export default function CalendarWidget() {
         </button>
       </div>
 
-      {/* Formulario de Añadir */}
       <AnimatePresence>
         {showForm && (
           <motion.form 
@@ -100,7 +98,6 @@ export default function CalendarWidget() {
         )}
       </AnimatePresence>
 
-      {/* Lista de Eventos */}
       <div className="flex-1 overflow-y-auto space-y-3 custom-scrollbar pr-1 z-10">
         {loading ? (
           <div className="animate-pulse space-y-3">
@@ -137,7 +134,6 @@ export default function CalendarWidget() {
         )}
       </div>
       
-      {/* Decoración de fondo */}
       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-secondary/5 to-transparent pointer-events-none" />
     </div>
   );
