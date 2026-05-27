@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // CONFIGURACIÓN
-define('SPREADSHEET_ID', 'TU_ID_DE_HOJA_DE_CALCULO_AQUI');
+define('1n2M7Ua-DTCWAYmgLR8ejCXrNDHuky518Ib0xcxroOAY', 'TU_ID_DE_HOJA_DE_CALCULO_AQUI');
 define('CREDENTIALS_FILE', __DIR__ . '/credentials.json');
 
 function getAccessToken() {
