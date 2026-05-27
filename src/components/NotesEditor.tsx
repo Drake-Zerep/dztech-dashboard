@@ -8,14 +8,13 @@ export default function NotesEditor() {
   const [saved, setSaved] = useState(false);
   const timeoutRef = useRef<any>(null);
 
-  // Cargar nota al iniciar
   useEffect(() => {
     const loadNote = async () => {
       try {
         const res = await fetch('/api/sheets.php?action=get_notes');
         const data = await res.json();
         if (data.values && data.values[0]) {
-          setNote(data.values[0][0]); // Asume que la nota está en A1
+          setNote(data.values[0][0]);
         }
       } catch (e) {
         console.error(e);
@@ -24,7 +23,6 @@ export default function NotesEditor() {
     loadNote();
   }, []);
 
-  // Guardado automático (Debounce)
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value;
     setNote(val);
@@ -53,7 +51,7 @@ export default function NotesEditor() {
   return (
     <div className="glass-card rounded-2xl p-4 h-full flex flex-col">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-xs font-mono text-muted tracking-widest uppercase">Quick Notes</h3>
+        <h3 className="text-xs font-mono text-muted mb-4 tracking-widest uppercase">Quick Notes</h3>
         <div className="flex items-center gap-2 text-xs text-muted">
           {saving ? <span className="animate-pulse">Guardando...</span> : 
            saved ? <span className="text-primary flex items-center gap-1"><Save size={10} /> Synced</span> : null}
